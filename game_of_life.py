@@ -1,4 +1,4 @@
-''' John Conway's Game of Life 
+''' John Conway's Game of Life
 
 Rules taken from http://www.bitstorm.org/gameoflife/.
 
@@ -10,34 +10,11 @@ For a space that is 'empty' or 'unpopulated'
 	Each cell with three neighbors becomes populated.
 
 '''
+
 from time import sleep
 from collections import OrderedDict
+from colorama import Fore, Style, init
 
-class Grid(object):
-	''' Base class for grid, a list of lists.
-
-	To add:
-		- A way to accept patterns
-	'''
-
-	def __init__(self, size):
-		self.size = size
-		self.empty_cell = "|_"
-		self.grid = OrderedDict()
-		for x in range(self.size):
-			for y in range(self.size):
-				key = str(x) + '-' + str(y)
-				self.grid[key] = self.empty_cell
-
-	def print_(self):
-		''' Joins values of the grid dictionary, '''
-		for i in range(self.size):
-			row_idx = str(i) + '-'
-			row_keys = filter(lambda key: key if key.startswith(row_idx)
-								else None, self.grid.keys())
-			row = [self.grid[e] for e in row_keys]
-			print ''.join(row)
-		return
 
 class Universe(object):
 	''' An iterator that steps through 'epochs' of the universe;
@@ -52,8 +29,8 @@ class Universe(object):
 		self.grid = None
 		self.size = 0
 		self.rate = rate
-		self.cell = '|O'
-		self.blank = '|_'
+		self.cell = Fore.GREEN + Style.BRIGHT + '|O'
+		self.blank = Fore.BLACK + Style.BRIGHT + '|_'
 		self.max_epoch = max_epoch
 
 	def construct_world(self, size):
@@ -77,7 +54,6 @@ class Universe(object):
 		'''
 		# manual population
 		if type(args[0]) is list:
-			print 'this is a list'
 			args = args[0]
 		for arg in args:
 			self.grid[arg] = self.cell
@@ -94,6 +70,7 @@ class Universe(object):
 
 	def __iter__(self):
 		self.epoch = 0
+		init(autoreset=True)
 		return self
 
 	def display(self):
@@ -111,7 +88,7 @@ class Universe(object):
 
 		if self.epoch > self.max_epoch:
 			raise StopIteration
-		print "EPOCH # -- %s" % self.epoch
+		print Fore.WHITE + Style.BRIGHT + "EPOCH # -- %s" % self.epoch
 		sleep(self.rate)
 		size = self.size
 		inhabited = lambda key: True if self.grid[key] == \
@@ -136,8 +113,8 @@ class Universe(object):
 		for key in next_gen_death:
 			self.grid[key] = self.blank
 		self.epoch += 1
-
-		return self.display()
+		self.display()
+		return
 
 	def find_neighbors(self, key):
 		''' Finds # of neighbors of cell at given address, `key`. '''
@@ -161,15 +138,18 @@ class Universe(object):
 		return neighbors
 
 
-game_of_life = Universe(max_epoch=10, rate=0.3)
-game_of_life.construct_world(50)
+game_of_life = Universe(max_epoch=100, rate=0.25)
+game_of_life.construct_world(25)
+
+# Tumbler
+#game_of_life.populate(['7-6', '7-7', '8-6', '8-7', '9-7', '10-7', '11-7'])
+#game_of_life.populate(['7-9', '8-9', '8-10', '9-9', '7-10', '10-9', '11-9'])
+#game_of_life.populate(['10-5', '11-5', '12-5', '12-6'])
+#game_of_life.populate(['10-11', '11-11', '12-11', '12-10'])
+
+# Mini Exploder
+game_of_life.populate(['9-10', '9-11', '9-12', '10-10', '10-12', '8-11', '11-11'])
 
 
-game_of_life.populate(['7-6', '7-7', '8-6', '8-7', '9-7', '10-7', '11-7'])
-game_of_life.populate(['7-9', '8-9', '8-10', '9-9', '7-10', '10-9', '11-9'])
-
-print game_of_life.display()
-
-for i in game_of_life:
-	print i
-
+for epoch in game_of_life:
+	epoch
