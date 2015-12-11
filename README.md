@@ -4,9 +4,7 @@ More information here:
 
 https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
-![Alt tag](img/GOL img.tiff)
 ![Imgur](http://i.imgur.com/0Haitkx.png)
-[Imgur](http://i.imgur.com/0Haitkx.png)
 
 This is a command-line "mini" implementation. For smaller patterns/grids (worlds),
 this is ideal. Otherwise it's clunkier for things like Gosper's Glider Gun, since the
@@ -20,4 +18,4 @@ The exposed parts of the interface include setting the max number of iterations 
 the rate at which frames are printed, and a limit on number of rows per frame 
 to be printed onto the command-line.
 
-Enjoy!
+_Enjoy_!
