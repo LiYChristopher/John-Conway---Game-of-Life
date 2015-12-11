@@ -21,6 +21,8 @@ class Universe(object):
 
 	:max_epoch: Maximum age.
 	:rate: Speed of each iteration, default is set to 0.5s.
+	:disp_limit: Sets limit for rows displayed in each frame, so the
+	world is a little more viewable when it's larger than ~30-40 rows.
 
 	'''
 
@@ -136,25 +138,25 @@ class Universe(object):
 if __name__ == '__main__':
 
 	# examples below, just uncomment. 
-	game_of_life = Universe(max_epoch=100, rate=0.15, disp_limit=30)
-	game_of_life.construct_world(25)
+	game_of_life = Universe(max_epoch=500, rate=0.075, disp_limit=37)
+	game_of_life.construct_world(60)
 
 	# Glider
 	#game_of_life.populate(['14-13', '14-14', '14-15', '13-15', '12-14'])
 
 	# Tumbler
-	#game_of_life.populate(['7-6', '7-7', '8-6', '8-7', '9-7', '10-7', '11-7'])
-	#game_of_life.populate(['7-9', '8-9', '8-10', '9-9', '7-10', '10-9', '11-9'])
-	#game_of_life.populate(['10-5', '11-5', '12-5', '12-6'])
-	#game_of_life.populate(['10-11', '11-11', '12-11', '12-10'])
+	game_of_life.populate(['7-6', '7-7', '8-6', '8-7', '9-7', '10-7', '11-7'])
+	game_of_life.populate(['7-9', '8-9', '8-10', '9-9', '7-10', '10-9', '11-9'])
+	game_of_life.populate(['10-5', '11-5', '12-5', '12-6'])
+	game_of_life.populate(['10-11', '11-11', '12-11', '12-10'])
 
 	# Mini Exploder
-	game_of_life.populate(['9-10', '9-11', '9-12', '10-10', '10-12', '8-11', '11-11'])
+	#game_of_life.populate(['9-10', '9-11', '9-12', '10-10', '10-12', '8-11', '11-11'])
 
-	# Gospel Gunglider
+	# Gosper's Glider Gun
 	#game_of_life.populate(['15-10', '15-11', '16-10', '16-11'])
 	#game_of_life.populate(['15-19', '15-20', '16-18', '16-20', '17-18', '17-19'])
-	#game_of_life.populate(['17-27', '17-27', '18-26', '18-28', '19-26'])
+	#game_of_life.populate(['17-26', '17-27', '18-26', '18-28', '19-26'])
 	#game_of_life.populate(['13-33', '13-34', '14-32', '14-34', '15-32', '15-33'])
 	#game_of_life.populate(['13-44', '13-45', '14-44', '14-45'])
 	#game_of_life.populate(['13-44', '13-45', '14-44', '14-45'])
