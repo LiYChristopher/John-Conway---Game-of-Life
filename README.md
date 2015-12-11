@@ -5,6 +5,8 @@ More information here:
 https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
 ![Alt tag](img/GOL img.tiff)
+![Imgur](http://i.imgur.com/0Haitkx.png)
+[Imgur](http://i.imgur.com/0Haitkx.png)
 
 This is a command-line "mini" implementation. For smaller patterns/grids (worlds),
 this is ideal. Otherwise it's clunkier for things like Gosper's Glider Gun, since the
