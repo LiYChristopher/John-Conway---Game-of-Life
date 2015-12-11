@@ -164,5 +164,5 @@ if __name__ == '__main__':
 	#game_of_life.populate(['25-34', '25-35', '25-36', '26-34', '27-35'])
 
 	game_of_life.display()
-for epoch in game_of_life:
-	epoch
+	for epoch in game_of_life:
+		epoch
