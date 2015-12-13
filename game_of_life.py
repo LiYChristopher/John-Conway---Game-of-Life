@@ -11,6 +11,7 @@ For a space that is 'empty' or 'unpopulated'
 '''
 
 from time import sleep
+from itertools import islice
 from collections import OrderedDict
 from colorama import Fore, Style, init
 
@@ -33,12 +34,12 @@ class Universe(object):
 		self.cell = Fore.GREEN + Style.BRIGHT + '|O'
 		self.blank = Fore.BLACK + Style.BRIGHT + '|_'
 		self.max_epoch = max_epoch
-		self.display_limit = self.size or disp_limit
+		self.display_limit = 0
 
 	def construct_world(self, size):
 		''' Builds the Game of Life grid as size * size board. '''
 
-		self.size = size
+		self.size, self.display_limit = (size,)*2
 		self.grid = OrderedDict()
 		for x in range(size):
 			for y in range(size):
@@ -137,9 +138,9 @@ class Universe(object):
 
 if __name__ == '__main__':
 
-	# examples below, just uncomment. 
-	game_of_life = Universe(max_epoch=500, rate=0.075, disp_limit=37)
-	game_of_life.construct_world(60)
+	# examples below, just uncomment.
+	game_of_life = Universe(max_epoch=500, rate=0.075, disp_limit=25)
+	game_of_life.construct_world(25)
 
 	# Glider
 	#game_of_life.populate(['14-13', '14-14', '14-15', '13-15', '12-14'])
@@ -153,7 +154,7 @@ if __name__ == '__main__':
 	# Mini Exploder
 	#game_of_life.populate(['9-10', '9-11', '9-12', '10-10', '10-12', '8-11', '11-11'])
 
-	# Gosper's Glider Gun
+	# Gosper Glider Gun
 	#game_of_life.populate(['15-10', '15-11', '16-10', '16-11'])
 	#game_of_life.populate(['15-19', '15-20', '16-18', '16-20', '17-18', '17-19'])
 	#game_of_life.populate(['17-26', '17-27', '18-26', '18-28', '19-26'])
@@ -163,6 +164,4 @@ if __name__ == '__main__':
 	#game_of_life.populate(['20-45', '20-46', '21-45', '21-47', '22-45'])
 	#game_of_life.populate(['25-34', '25-35', '25-36', '26-34', '27-35'])
 
-	game_of_life.display()
-	for epoch in game_of_life:
-		epoch
+	list(islice(game_of_life, 0, None))
